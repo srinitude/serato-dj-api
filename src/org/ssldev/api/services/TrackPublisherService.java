@@ -13,13 +13,14 @@ import org.ssldev.core.mgmt.EventHub;
 import org.ssldev.core.services.Service;
 import org.ssldev.core.utils.Logger;
 /**
- * publishes what tracks are playing and get loaded on a set of decks.
+ * models a set of decks and publishes out track changes per deck.  in practice, it
+ * publishes an 'inCue' track whenever a track gets loaded onto a deck.
  */
 public class TrackPublisherService extends Service {
-	Map<Integer,Deck> decks = new HashMap<>();
+	private Map<Integer,Deck> decks = new HashMap<>();
 	
 	/** ensure serial track processing */
-	final Boolean lock = new Boolean(true);
+	private final Object lock = new Object();
 
 	public TrackPublisherService(EventHub hub) {
 		super(hub);

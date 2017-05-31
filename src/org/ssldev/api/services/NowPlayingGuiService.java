@@ -2,7 +2,7 @@ package org.ssldev.api.services;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.ssldev.api.app.SslApiApp;
+import org.ssldev.api.app.SslApi;
 import org.ssldev.api.gui.GuiEventListenerIF;
 import org.ssldev.api.gui.NowPlayingAppGUI;
 import org.ssldev.api.messages.NowInCueMessage;
@@ -66,7 +66,7 @@ public class NowPlayingGuiService extends Service {
 	
 	protected void doShutdown() {
 		// tell model to shutdown
-		SslApiApp.shutdown();
+		SslApi.shutdown();
 	}
 	
 	@Override

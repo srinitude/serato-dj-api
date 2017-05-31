@@ -56,11 +56,9 @@ public class DataConsumedPublisherService extends Service {
 			throw new IllegalStateException("structure may have changed. assumed top level consumer is SslByteConsumer. instead got "+sslData.getClass().getSimpleName());
 		}
 		SslByteConsumer ssl = (SslByteConsumer)sslData;
-//		Logger.debug(this, "writing " + ssl.getData().size() + " consumed objects to DOM");
 		
 		List<Oent> oents = new LinkedList<>();
 		for(ByteConsumerIF c : ssl.getData()) {
-//			hub.add(new WriteToFileMessage(domFilePath,c.toString()+"\n"));
 			if(c instanceof Oent) {
 				oents.add((Oent) c);
 			}
