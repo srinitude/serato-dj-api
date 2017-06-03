@@ -2,27 +2,29 @@ SSLAPI
 ======
 
 the SSL API parses in the binary history file produced by Serato DJ / ScratchLive
-and publishes out play data as events.  It is meant to provide an (unofficial) 
-API for any developers looking to create Serato based apps.  
+and publishes out play data as events.  It is meant to act as a middleware and
+serve as an (unofficial) API for any developers looking to utilize Serato play data.  
 
 This project was inspired by Ben XO’s SslScrobbler project.  He has some great 
 documentation on the SSL binary format and overall chunk structure, so i won’t 
 repeat it here.  Check out his project for more details: https://github.com/ben-xo/sslscrobbler
 
+Quick Start guide
+-----------------
+I created a GUI to demonstrate the type of play data that can be received:
+1. clone and build the project in your favorite IDE
+2. set `startGui=true` in `resources/SslApiAppConfiguration.properties`
+3. run the main method in `org.ssldev.api.app.SslApi`
 
-Background
-==========
-I’ve created the SSL API as a fun side project, to support another App i’m 
-working on, and in the hopes of making it easier for other devs to create Serato 
-applications.  The API is meant to provide a middleware that takes care of the 
-parsing/processing of SSL byte data, and publishes out the data as tracks, to 
-interested subscribers.
-
+The GUI can be started before or after SSL/Serato DJ, and should display a track
+as soon as it is loaded to one of the decks.  The ssldom.txt file (`/home/<user>/.sslapi/ssldom.txt`)
+will capture all tracks played so far in the current session.  Logging is piped 
+to `/home/<user>/.sslapi/log.txt`.
 
 How to use the API
-==================
-The recommended way to use SSLAPI is to register the client as a service and specify
-which messages of interest the client should receive:
+------------------
+The recommended way to use SSLAPI is to simply register a service client and specify
+which messages the client should receive:
 
 		/*
 		 * 1. instantiate the ssl-api
@@ -46,7 +48,7 @@ which messages of interest the client should receive:
 
 			@Override
 			public void shutdown() {
-				// null
+				// shutdown logic if necessary...
 			}
 
 			@Override
@@ -59,22 +61,32 @@ which messages of interest the client should receive:
 
 
 How does it work
-================
-the API is designed around the EventHub pub/sub pattern, where each (micro)service 
-registers with a central event hub, and acts upon the message that it is interested
+----------------
+the app framework is designed around the EventHub pub/sub pattern, where each (micro)service 
+registers with a central event hub, and acts upon message/events that it is interested
 in.  An async event hub is used (i.e blocking queue) as a simplistic threading 
 model for the app.
 
 once initialized, SSLAPI picks out which history session file to monitor (if Serato DJ/SSL 
-has started; otherwise, it'll wait for one to be created)(SslCurrentSessionFinderService).
+has started; otherwise, it'll wait for one to be created)(`SslCurrentSessionFinderService`).
 Then on each consecutive update it parses out newly appended bytes into OENT/ADAT
-chunks (SslByteConsumerService & DataConsumedPublisherService).
+chunks (`SslByteConsumerService` & `DataConsumedPublisherService`).
 
--TBD- Byte consumer structure and consumption strategy descriptions
+Byte Consumers fall into 2 types: compound & leafs.  Compound consumers (e.g OENT, ADAT)
+are made up of child byte consumers.  Each byte consumer encapsulates all knowledge
+of how to consume binary data and store it.
 
+The intent of the design is to make it easy to add/modify/edit the byte consumers
+as the SSL binary format evolves.  For example, the ADAT chunk contains data fields
+such as BPM, TITLE, etc.  Adding a new field is as easy as creating a new field
+byte consumer specifying what consumption strategy to use, and adding it to the 
+ADAT via the `constructAdat()` method.    
+
+Messages/Events
+---------------
 To provide a more meaningful abstraction, the API models “decks” that publish 
 events such as ‘NowPlaying’ or ‘NowInCue’ to show what tracks are playing and on
-what deck.  In contrast, raw or non-abstracted data is contained in the AdatConsumedMessage 
+what deck.  In contrast, non-abstracted data is contained in the AdatConsumedMessage 
 
 NOTE: since SeratoDj/SSL cannot differentiate whether a song is really playing 
 or not (controlled by the mixer crossfader/volume knob) neither can this API.  To 
@@ -84,6 +96,6 @@ to do so.
 
 
 Disclaimer
-==========
+----------
 SSLAPI is free open source software licensed under the MIT license and is provided 
 without warranties of any kind.
