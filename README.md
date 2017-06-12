@@ -11,6 +11,10 @@ repeat it here.  Check out his project for more details: https://github.com/ben-
 
 Quick Start guide
 -----------------
+
+06/10/2017: added an executable version of the app that launches the GUI demo.  Just download
+the SslGuiDemo.jar and launch it (works on macosx)
+
 I created a GUI to demonstrate the type of play data that can be received:
 1. clone and build the project in your favorite IDE
 2. set `startGui=true` in `resources/SslApiAppConfiguration.properties`
