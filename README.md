@@ -9,11 +9,15 @@ This project was inspired by Ben XO’s SslScrobbler project.  He has some great
 documentation on the SSL binary format and overall chunk structure, so i won’t 
 repeat it here.  Check out his project for more details: https://github.com/ben-xo/sslscrobbler
 
+contact me via __http://projects.ssldev.org__ with any comments/questions.
+
 Quick Start guide
 -----------------
 
-06/10/2017: added an executable version of the app that launches the GUI demo.  Just download
-the SslGuiDemo.jar and launch it (works on macosx)
+**06/10/2017:** added an executable version of the app that launches the GUI demo.  Just download
+the SslGuiDemo.jar and launch it (works on macosx). Requires JRE8 (JavaRunTime) or better.  
+Can be downloaded here:
+http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
 
 I created a GUI to demonstrate the type of play data that can be received:
 1. clone and build the project in your favorite IDE
@@ -30,6 +34,7 @@ How to use the API
 The recommended way to use SSLAPI is to simply register a service client and specify
 which messages the client should receive:
 
+```java
 		/*
 		 * 1. instantiate the ssl-api
 		 */
@@ -62,7 +67,7 @@ which messages the client should receive:
 		}	
 		// subscribe for mostly single track changes, as modeled by the TrackPublisherService
 		, NowPlayingMessage.class, NowInCueMessage.class);
-
+```
 
 How does it work
 ----------------
