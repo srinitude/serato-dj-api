@@ -11,8 +11,15 @@ repeat it here.  Check out his project for more details: https://github.com/ben-
 
 contact me via __http://projects.ssldev.org__ with any comments/questions.
 
+Working in Eclipse (with JDK 8 or better)
+-----------------------------------------
+You'll need to download the latest e(fx)clipse plugin from the eclipse market place,
+to avoid JAVAFX compilation warnings.
+
 Quick Start guide
 -----------------
+**03/04/2018:** Serato DJ Pro seemed to have introduced a few binary changes.  I'm 
+working on updating the structure and hope to have it done shortly!
 
 **06/10/2017:** added an executable version of the app that launches the GUI demo.  Just download
 the SslGuiDemo.jar and launch it (works on macosx). Requires JRE8 (JavaRunTime) or better.  
