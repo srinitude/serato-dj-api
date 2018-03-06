@@ -37,6 +37,9 @@ import org.ssldev.api.fields.Adat8AlbumField;
 import org.ssldev.api.fields.Adat9GenreField;
 import org.ssldev.api.fields.AdatField33;
 import org.ssldev.api.fields.AdatField39;
+import org.ssldev.api.fields.AdatField63;
+import org.ssldev.api.fields.AdatField68;
+import org.ssldev.api.fields.AdatField69;
 import org.ssldev.api.fields.AdatField70;
 import org.ssldev.api.fields.AdatField72;
 /**
@@ -139,6 +142,9 @@ public class Adat extends ByteConsumer {
 		register(new Adat51KeyField()); 		// 51 
 		register(new Adat52AddedField()); 		// 52 
 		register(new Adat53UpdatedAtField()); 	// 53 
+		register(new AdatField63()); 			// 63 
+		register(new AdatField68()); 			// 68 
+		register(new AdatField69()); 			// 69 
 		register(new AdatField70()); 			// 70 
 		register(new AdatField72()); 			// 72 
 	}
