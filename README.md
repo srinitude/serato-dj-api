@@ -11,6 +11,20 @@ repeat it here.  Check out his project for more details: https://github.com/ben-
 
 contact me via __http://projects.ssldev.org__ with any comments/questions.
 
+
+Dev Notes:
+----------
+**07/31/2018:** Added ability to convert a serato crate file via the `CrateConvertRequestMessage`
+
+**04/29/2018:** Added additional ADAT fields introduced by Serato DJ pro (field's 63, 68, 69). 
+Also noticed that field 72 appears when playing tracks in offline mode. (ps: If anyone 
+knows what their purpose is, please drop me a note!)
+
+**06/10/2017:** added an executable version of the app that launches the GUI demo.  Just download
+the SslGuiDemo.jar and launch it (works on macosx). Requires JRE8 (JavaRunTime) or better.  
+Can be downloaded here:
+http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
+
 Working in Eclipse (with JDK 8 or better)
 -----------------------------------------
 You'll need to download the latest e(fx)clipse plugin from the eclipse market place,
@@ -18,14 +32,6 @@ to avoid JAVAFX compilation warnings.
 
 Quick Start guide
 -----------------
-**03/04/2018:** Serato DJ Pro seemed to have introduced a few binary changes.  I'm 
-working on updating the structure and hope to have it done shortly!
-
-**06/10/2017:** added an executable version of the app that launches the GUI demo.  Just download
-the SslGuiDemo.jar and launch it (works on macosx). Requires JRE8 (JavaRunTime) or better.  
-Can be downloaded here:
-http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
-
 I created a GUI to demonstrate the type of play data that can be received:
 1. clone and build the project in your favorite IDE
 2. set `startGui=true` in `resources/SslApiAppConfiguration.properties`

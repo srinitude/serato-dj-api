@@ -1,3 +1,6 @@
 [submodule "extern"]
 	path = extern
 	url = git@gitlab.com:eladmaz/core.git
+[submodule "ex"]
+	path = ex
+	url = git@gitlab.com:eladmaz/core.git

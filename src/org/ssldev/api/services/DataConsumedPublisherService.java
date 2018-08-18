@@ -69,7 +69,7 @@ public class DataConsumedPublisherService extends Service {
 			Logger.debug(this,"one oent updated");
 			addAdats(oents.remove(0));
 		}
-		else {
+		else if(oents.size() > 1){
 			// multi-track happens when reading in a pre-existing history file
 			Logger.debug(this,oents.size() +" oents got updated");
 			List<Adat> adats = 
@@ -80,6 +80,9 @@ public class DataConsumedPublisherService extends Service {
 			
 			Logger.debug(this,"collected "+adats.size() + " adats");
 			hub.add(new MultipleAdatsConsumedMessage(adats));
+		}
+		else {
+			Logger.error(this, "no oents were consumed. structure must be bad");
 		}
 	}
 	
