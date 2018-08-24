@@ -14,6 +14,17 @@ contact me via __http://projects.ssldev.org__ with any comments/questions.
 
 Dev Notes:
 ----------
+**08/23/2018 (v0.2):** Mavenized the project and uploaded v0.2 artifact to Maven central. SSL-API can 
+now easily be used by other Maven projects, by adding the following dependency:
+```xml
+  <dependency>
+   <groupId>org.ssldev</groupId>
+   <artifactId>SSL-API</artifactId>
+   <version>0.2</version>
+   <scope>compile</scope>
+  </dependency>
+```
+
 **07/31/2018:** Added ability to convert a serato crate file via the `CrateConvertRequestMessage`
 
 **04/29/2018:** Added additional ADAT fields introduced by Serato DJ pro (field's 63, 68, 69). 
@@ -30,7 +41,7 @@ Working in Eclipse (with JDK 8 or better)
 You'll need to download the latest e(fx)clipse plugin from the eclipse market place,
 to avoid JAVAFX compilation warnings.
 
-Quick Start guide
+GUI Quick Start
 -----------------
 I created a GUI to demonstrate the type of play data that can be received:
 1. clone and build the project in your favorite IDE
@@ -41,6 +52,18 @@ The GUI can be started before or after SSL/Serato DJ, and should display a track
 as soon as it is loaded to one of the decks.  The ssldom.txt file (`/home/<user>/.sslapi/ssldom.txt`)
 will capture all tracks played so far in the current session.  Logging is piped 
 to `/home/<user>/.sslapi/log.txt`.
+
+Maven Build/Run Quick Start
+---------------------
+open terminal/shell:
+1. clone the repo:   
+   * git clone git@gitlab.com:eladmaz/SSL-API.git
+2. build the project:   
+   * cd SSL-API/
+   * mvn clean install
+3. run the API to receive real-time play events from Serato DJ (note: you can adjust 
+the run configuration by modifying `.../ssl-api/src/main/resources/sslApiConfiguration.properties`   
+   * mvn exec:java
 
 How to use the API
 ------------------
