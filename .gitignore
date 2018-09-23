@@ -1,7 +1,10 @@
 /bin/
+*/target/**
+*/target/*
 .settings
 .classpath
 .project
 *.class
 *.prefs
+*html
 /.DS_Store

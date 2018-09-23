@@ -1,0 +1,34 @@
+/*
+ * top label showing current track name & artist
+ */
+.label {
+	-fx-text-fill: black;
+}
+
+/* 
+ * Selectable track list view properties:
+ */
+.list-view {
+	-fx-background-color: rgb(40,41,40)
+	/*-fx-background-color: rgb(196,198,198)*/
+}
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: rgb(151,54,0)
+    /*-fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white; */
+}
+.list-cell:even { /* <=== changed to even */
+    -fx-background-color: rgb(0,0,0);
+    -fx-text-fill: white;
+}
+.list-cell:odd { 
+    -fx-background-color:  rgb(33,34,33);
+    -fx-text-fill: white;
+}
+.list-cell:filled:hover {
+	-fx-background-color: rgb(50,51,50);
+	-fx-text-fill: white;
+	
+     /*-fx-background-color: #0093ff; */
+    /*-fx-text-fill: white; */ 
+}
