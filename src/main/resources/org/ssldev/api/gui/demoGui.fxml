@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<AnchorPane fx:id="layout" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMousePressed" onMouseDragged="#onMouseDragged" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" prefHeight="565.0" prefWidth="679.0" style="-fx-background-color: transparent" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ssldev.api.gui.MainWindowController">
+   <effect>
+      <Glow />
+   </effect>
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="699.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <StackPane prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="cueTitleLbl" prefHeight="28.0" prefWidth="572.0" />
+               </children>
+            </StackPane>
+         </top>
+         <center>
+            <ListView fx:id="trackList" prefHeight="525.0" prefWidth="699.0" stylesheets="@demoGui.css" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
