@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"org.ssldev.api.app"},{"l":"org.ssldev.api.chunks"},{"l":"org.ssldev.api.consumption"},{"l":"org.ssldev.api.consumption.strategies"},{"l":"org.ssldev.api.demo"},{"l":"org.ssldev.api.fields"},{"l":"org.ssldev.api.gui"},{"l":"org.ssldev.api.messages"},{"l":"org.ssldev.api.services"},{"l":"org.ssldev.api.utils"}]
