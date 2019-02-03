@@ -37,7 +37,7 @@ public class DomService extends Service {
 			
 			try {
 				// delete old DOM
-				if(theDom.delete()) {
+				if(!theDom.delete()) {
 					Logger.warn(this, "was not able to delete the DOM.  Current session data will be appended to previous!");
 				}
 				

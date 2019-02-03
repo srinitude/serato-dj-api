@@ -22,6 +22,9 @@ public class SslBuffer {
 	public int readInt4() {
 		return BinaryUtil.readInt(buf, 4);
 	}
+	public long readLong8() {
+		return BinaryUtil.readLong(buf);
+	}
 	public String readRawString(int len) {
 		return BinaryUtil.readRawString(buf, len);
 	}

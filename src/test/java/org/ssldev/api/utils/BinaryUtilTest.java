@@ -44,6 +44,19 @@ public class BinaryUtilTest {
 		assertEquals(292,id);
 	}
 	@Test
+	public void testReadLong() {
+		bytes.add(Integer.valueOf(0));
+		bytes.add(Integer.valueOf(0));
+		bytes.add(Integer.valueOf(0));
+		bytes.add(Integer.valueOf(0));
+		bytes.add(Integer.valueOf(0));
+		bytes.add(Integer.valueOf(0));
+		bytes.add(Integer.valueOf(0));
+		bytes.add(Integer.valueOf(8));
+		long id = BinaryUtil.readLong(bytes);
+		assertEquals(8,id);
+	}
+	@Test
 	public void testLength() {
 		bytes.add(Integer.valueOf(0));
 		bytes.add(Integer.valueOf(0));

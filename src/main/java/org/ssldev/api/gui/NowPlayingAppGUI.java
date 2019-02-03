@@ -1,8 +1,6 @@
 package org.ssldev.api.gui;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.ssldev.core.utils.Logger;
 
@@ -18,7 +16,6 @@ import javafx.stage.StageStyle;
  */
 public class NowPlayingAppGUI extends Application {
 	private static MainWindowController controller;
-	private static List<GuiEventListenerIF> eventListeners = new LinkedList<>();
 	protected Stage stage;
 	protected Scene scene;
 
@@ -79,9 +76,4 @@ public class NowPlayingAppGUI extends Application {
 		}
 		controller.appendToLogWindow(txt);
 	}
-
-	public static void addListener(GuiEventListenerIF listener) {
-		eventListeners.add(listener);
-	}
-
 }

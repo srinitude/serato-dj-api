@@ -1,9 +1,7 @@
 package org.ssldev.api.fields;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.ssldev.api.consumption.strategies.IntConsumeStrategy;
+import org.ssldev.api.consumption.strategies.LongOrIntConsumeStrategy;
+import org.ssldev.core.utils.SysInfo;
 
 public class Adat29EndTimeField extends Field <Adat29EndTimeField >{
 
@@ -11,15 +9,13 @@ public class Adat29EndTimeField extends Field <Adat29EndTimeField >{
 
 	public Adat29EndTimeField() {
 		super("EndTime",29);
-		consume = new IntConsumeStrategy();
+		consume = new LongOrIntConsumeStrategy();
 	}
-	
-	private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder(name); 
-		sb.append(": ").append(sdf.format(new Date(((Integer)(data)).longValue()*1000)));
+		sb.append(": ").append(SysInfo.getDate((((Number)data).longValue()*1000)));
 		return sb.toString();
 	}
 

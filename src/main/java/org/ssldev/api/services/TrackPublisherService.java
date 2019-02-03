@@ -12,6 +12,7 @@ import org.ssldev.core.messages.MessageIF;
 import org.ssldev.core.mgmt.EventHub;
 import org.ssldev.core.services.Service;
 import org.ssldev.core.utils.Logger;
+import org.ssldev.core.utils.SysInfo;
 /**
  * models a set of decks and publishes out track changes per deck.  in practice, it
  * publishes an 'inCue' track whenever a track gets loaded onto a deck.
@@ -103,7 +104,9 @@ public class TrackPublisherService extends Service {
 
 		private void publishTrackUpdated(Adat adat) {
 			Logger.info(this, toString() + "[Update] "+adat.getArtist() +" - " +adat.getTitle() + " ["+adat.getBpm()+"] : "
-					+ " s.time "+adat.getStartTime()+", e.time "+adat.getEndTime()+", u.time " + adat.getUpdateTime());
+					+ " s.time "+SysInfo.getDate(adat.getStartTime() * 1000)
+					+", e.time "+SysInfo.getDate(adat.getEndTime() * 1000)
+					+", u.time " + SysInfo.getDate(adat.getUpdateTime() * 1000));
 			Logger.debug(this, adat.toString());
 			hub.add(new TrackInDeckUpdatedMessage(adat, deck));
 		}
