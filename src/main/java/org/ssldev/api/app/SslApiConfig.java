@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import org.ssldev.core.utils.Logger;
 import org.ssldev.core.utils.SysInfo;
@@ -121,13 +122,16 @@ public class SslApiConfig {
 		
 		return val;
 	}
-
+	
+	
 	@Override
 	public String toString() {
 		if(null == configAsString) {
-			StringBuilder sb = new StringBuilder(getClass().getSimpleName());
-			sb.append("\n").append(config);
-			configAsString = sb.toString();
+			configAsString = config.getClass().getName() + System.lineSeparator();
+			configAsString += config.entrySet().stream()
+									 		  .map(e -> String.format( "  %-24s : [%s]", e.getKey(), e.getValue()))
+									 		  .collect(Collectors.joining(System.lineSeparator()));
+			
 		}
 		return configAsString;
 	}

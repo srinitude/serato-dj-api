@@ -15,7 +15,7 @@ public class SslConvertApi {
 
 	public SslConvertApi(AsyncEventHub hub) {
 		
-		Logger.enableDebug(true); 
+		Logger.enableDebug(false); 
 		Logger.enableFinest(false); 
 		Logger.enableTrace(false);
 		Logger.setShowTime(true);

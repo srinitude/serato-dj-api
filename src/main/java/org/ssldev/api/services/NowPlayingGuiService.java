@@ -3,7 +3,6 @@ package org.ssldev.api.services;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.ssldev.api.app.SslApi;
-import org.ssldev.api.gui.GuiEventListenerIF;
 import org.ssldev.api.gui.NowPlayingAppGUI;
 import org.ssldev.api.messages.NowInCueMessage;
 import org.ssldev.api.messages.NowPlayingMessage;
@@ -16,7 +15,6 @@ import org.ssldev.core.utils.Logger;
 import javafx.application.Application;
 
 public class NowPlayingGuiService extends Service {
-	private boolean isInitialized = false;
 	
 	private AtomicInteger ctr = new AtomicInteger(1);
 
@@ -28,26 +26,21 @@ public class NowPlayingGuiService extends Service {
 			return;
 		}
 		
-		// only do once...
-		if(!isInitialized) {
-			hub.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					Thread.currentThread().setName("THREAD - GUI launch service");
-					// start the GUI
-					Application.launch(NowPlayingAppGUI.class, new String[0]);
-					// GUI has exited..
-					doShutdown();
-					Logger.info(this, "GUI exit...");
-				}
-			});
+		// only happens once...
+		hub.invokeLater(NowPlayingGuiService::startGui);
+	}
+	
+	private static void startGui() {
+		Thread.currentThread().setName("THREAD - GUI launch service");
+		// start the GUI
+		try {
+			Application.launch(NowPlayingAppGUI.class, new String[0]);
+			// GUI has exited..
+			doShutdown();
+			Logger.info(NowPlayingGuiService.class, "GUI exit...");
+		} catch(IllegalStateException e) {
+			Logger.warn(NowPlayingGuiService.class, "cannot start SSL API GUI more than once.");
 		}
-		NowPlayingAppGUI.addListener(new GuiEventListenerIF() {
-			@Override
-			public void onShutdown() {
-				doShutdown();
-			}
-		});
 	}
 
 	@Override
@@ -64,16 +57,9 @@ public class NowPlayingGuiService extends Service {
 		}
 	}
 	
-	protected void doShutdown() {
+	protected static void doShutdown() {
 		// tell model to shutdown
 		SslApi.shutdown();
-	}
-	
-	@Override
-	public void shutdown() {
-		super.shutdown(); 
-		//TODO model cannot tell gui to shutdown (currently will cause circular calls)
-//		NowPlayingAppGUI.shutdown();
 	}
 
 }

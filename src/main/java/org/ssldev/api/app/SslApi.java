@@ -35,7 +35,6 @@ public class SslApi {
 	public void init(EventHub hub) {
 		// laod the configuration
 		SslApiConfig.load(configFileName);
-		System.out.println(SslApiConfig.instance.toString());
 
 		showGui = SslApiConfig.getBooleanProperty(SslApiConfig.Property.START_GUI);
 		
@@ -53,6 +52,8 @@ public class SslApi {
 		Logger.enableFinest(SslApiConfig.getBooleanProperty(SslApiConfig.Property.ENABLE_FINEST)); 
 		Logger.enableTrace(SslApiConfig.getBooleanProperty(SslApiConfig.Property.ENABLE_TRACE));
 		Logger.setShowTime(SslApiConfig.getBooleanProperty(SslApiConfig.Property.SHOW_TIME));
+		
+		Logger.info(this, "Running with the following properties:" + System.lineSeparator() + SslApiConfig.instance.toString());
 		
 		if(SslApiConfig.getBooleanProperty(SslApiConfig.Property.ENABLE_LOG_TO_FILE)) {
 			String logFilePath = SslApiConfig.getStringProperty(SslApiConfig.Property.LOG_FILE_PATH);
@@ -79,6 +80,8 @@ public class SslApi {
 	
 	@SuppressWarnings("unused")
 	private void registerAllServices(EventHub hub) {
+		Logger.info(this, "Registering all API services:");
+		
 		// create all services 
 		SslFileReaderService readerService = new SslFileReaderService(hub);
 		SslSessionFileUnmarshalService sslUnmarshalService = new SslSessionFileUnmarshalService(hub); 

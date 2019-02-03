@@ -95,6 +95,26 @@ public class BinaryUtil {
 		int ans = wrap.getInt();
 		return ans;
 	}
+	
+	public static long readLong(Queue<Integer> bytes) {
+		if(8 > bytes.size()) {
+			Logger.error("BinaryUtil", 
+					"asked to readInt "+8+" bytes past current buffer size of "+bytes.size());
+			throw new IllegalArgumentException("cannot ff buffer by " + 8);
+		}
+		
+		byte[] bs = new byte[8];
+		for(int ii=0; ii< 8 ; ii++) {
+			byte b = bytes.poll().byteValue();
+			bs[ii] = b;
+			debug(index++ + ": " + " " + toChar(bs[ii]) + "["+bs[ii]+"]");
+		}
+		ByteBuffer wrap = ByteBuffer.wrap(bs);
+		long ans = wrap.getLong();
+		return ans;
+	}
+	
+	
 
 	public static void fastforward(Queue<Integer> buf, int i) {
 		if(i > buf.size()) {

@@ -37,7 +37,7 @@ import org.ssldev.api.fields.Adat8AlbumField;
 import org.ssldev.api.fields.Adat9GenreField;
 import org.ssldev.api.fields.AdatField33;
 import org.ssldev.api.fields.AdatField39;
-import org.ssldev.api.fields.AdatField63;
+import org.ssldev.api.fields.Adat63PlayerTypeField;
 import org.ssldev.api.fields.AdatField68;
 import org.ssldev.api.fields.AdatField69;
 import org.ssldev.api.fields.AdatField70;
@@ -73,15 +73,15 @@ public class Adat extends ByteConsumer {
 	}
 	public long getStartTime() {
 		ByteConsumerIF b = getData(Adat28StartTimeField.ID);
-		return null == b ? 0 : ((Integer)b.getData()).longValue();
+		return null == b ? 0 : parseLong(b.getData());
 	}
 	public long getEndTime() {
 		ByteConsumerIF b = getData(Adat29EndTimeField.ID);
-		return null == b ? 0 : ((Integer)b.getData()).longValue();
+		return null == b ? 0 : parseLong(b.getData());
 	}
 	public long getTotalPlayTime() {
 		ByteConsumerIF b = getData(Adat45PlaytimeField.ID);
-		return null == b ? 0 : ((Integer)b.getData()).longValue();
+		return null == b ? 0 : parseLong(b.getData());
 	}
 	public String getKey() {
 		ByteConsumerIF b = getData(Adat51KeyField.ID);
@@ -101,7 +101,7 @@ public class Adat extends ByteConsumer {
 	}
 	public long getUpdateTime() {
 		ByteConsumerIF b = getData(Adat53UpdatedAtField.ID);
-		return null == b ? 0 : (int) b.getData();
+		return null == b ? 0 : parseLong(b.getData());
 	}
 	public int getBpm() {
 		ByteConsumerIF b = getData(Adat15BpmField.ID);
@@ -142,7 +142,7 @@ public class Adat extends ByteConsumer {
 		register(new Adat51KeyField()); 		// 51 
 		register(new Adat52AddedField()); 		// 52 
 		register(new Adat53UpdatedAtField()); 	// 53 
-		register(new AdatField63()); 			// 63 
+		register(new Adat63PlayerTypeField()); 	// 63 
 		register(new AdatField68()); 			// 68 
 		register(new AdatField69()); 			// 69 
 		register(new AdatField70()); 			// 70 
@@ -164,5 +164,14 @@ public class Adat extends ByteConsumer {
 		}
 		return sb.toString();
 	}
+	
+	
+	private static long parseLong(Object obj) {
+		if(obj instanceof Number) {
+			return Long.parseLong(String.valueOf(obj));
+		}
+		throw new IllegalArgumentException("'" +obj + "' is not a number");
+	}
+	
 
 }

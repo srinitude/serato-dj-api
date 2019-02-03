@@ -32,7 +32,7 @@ public abstract class ByteConsumer implements ByteConsumerIF{
 	}
 
 	public void consume(SslBuffer bytes) {
-		Logger.finest(this, " consuming <" + id+ ">.  bytes remaining: " + bytes.size());
+		Logger.finest(this, " consuming ID <" + id+ ">.  bytes size: " + bytes.size());
 		consume.consume(bytes);
 		data = consume.getData();
 	}
